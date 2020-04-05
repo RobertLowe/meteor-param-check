@@ -3,27 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _underscore = _interopRequireDefault(require("underscore"));
 
-var _underscore = require("underscore");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _underscore2 = _interopRequireDefault(_underscore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 // Copy of jQuery.isPlainObject for the server side from jQuery v1.11.2.
-
 var class2type = {};
-
 var toString = class2type.toString;
-
 var hasOwn = class2type.hasOwnProperty;
+var support = {}; // Populate the class2type map
 
-var support = {};
-
-// Populate the class2type map
-_underscore2.default.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function (name, i) {
+_underscore["default"].each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function (name, i) {
   class2type["[object " + name + "]"] = name.toLowerCase();
 });
 
@@ -31,7 +25,8 @@ function type(obj) {
   if (obj == null) {
     return obj + "";
   }
-  return (typeof obj === "undefined" ? "undefined" : _typeof(obj)) === "object" || typeof obj === "function" ? class2type[toString.call(obj)] || "object" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+
+  return _typeof(obj) === "object" || typeof obj === "function" ? class2type[toString.call(obj)] || "object" : _typeof(obj);
 }
 
 function isWindow(obj) {
@@ -40,11 +35,10 @@ function isWindow(obj) {
 }
 
 function isPlainObject(obj) {
-  var key;
-
-  // Must be an Object.
+  var key; // Must be an Object.
   // Because of IE, we also have to check the presence of the constructor property.
   // Make sure that DOM nodes and window objects don't pass through, as well
+
   if (!obj || type(obj) !== "object" || obj.nodeType || isWindow(obj)) {
     return false;
   }
@@ -57,21 +51,23 @@ function isPlainObject(obj) {
   } catch (e) {
     // IE8,9 Will throw exceptions on certain host objects #9897
     return false;
-  }
-
-  // Support: IE<9
+  } // Support: IE<9
   // Handle iteration over inherited properties before own properties.
+
+
   if (support.ownLast) {
     for (key in obj) {
       return hasOwn.call(obj, key);
     }
-  }
-
-  // Own properties are enumerated firstly, so to speed up,
+  } // Own properties are enumerated firstly, so to speed up,
   // if last one is own, then all properties are own.
+
+
   for (key in obj) {}
 
   return key === undefined || hasOwn.call(obj, key);
-};
+}
 
-exports.default = isPlainObject;
+;
+var _default = isPlainObject;
+exports["default"] = _default;

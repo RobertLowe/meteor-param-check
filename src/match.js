@@ -41,7 +41,7 @@ var check = exports.check = function (value, pattern) {
     argChecker.checking(value);
   var result = testSubtree(value, pattern);
   if (result) {
-    var err = new Match.Error(result.message);
+    var err = new CheckError(result.message);
     if (result.path) {
       err.message += " in field " + result.path;
       err.path = result.path;
@@ -78,7 +78,7 @@ var Match = exports.Match = {
   Integer: ['__integer__'],
 
   // XXX matchers should know how to describe themselves for errors
-  Error: CheckError,
+  // Error: CheckError,
 
   // Tests to see if value matches pattern. Unlike check, it merely returns true
   // or false (unless an error other than Match.Error was thrown). It does not
@@ -111,7 +111,7 @@ var Maybe = function (pattern) {
 
 var OneOf = function (choices) {
   if (_.isEmpty(choices))
-    throw new Error("Must provide at least one choice to Match.OneOf");
+    throw new CheckError("Must provide at least one choice to Match.OneOf");
   this.choices = choices;
 };
 
@@ -255,7 +255,7 @@ var testSubtree = function (value, pattern) {
     try {
       result = pattern.condition(value);
     } catch (err) {
-      if (!(err instanceof Match.Error))
+      if (!(err instanceof Error))
         throw err;
       return {
         message: err.message,
@@ -448,7 +448,7 @@ _.extend(ArgumentChecker.prototype, {
   throwUnlessAllArgumentsHaveBeenChecked: function () {
     var self = this;
     if (!_.isEmpty(self.args))
-      throw new Error("Did not check() all arguments during " +
+      throw new CheckError("Did not check() all arguments during " +
                       self.description);
   }
 });

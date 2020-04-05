@@ -1,15 +1,21 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Match = exports.check = undefined;
+Object.defineProperty(exports, "check", {
+  enumerable: true,
+  get: function get() {
+    return _match.check;
+  }
+});
+Object.defineProperty(exports, "Match", {
+  enumerable: true,
+  get: function get() {
+    return _match.Match;
+  }
+});
 
-require('babel-core/register');
+require("@babel/register");
 
-require('babel-plugin-external-helpers');
-
-var _match = require('./match');
-
-exports.check = _match.check;
-exports.Match = _match.Match;
+var _match = require("./match");

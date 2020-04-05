@@ -6,7 +6,7 @@ import concat from 'gulp-concat';
 gulp.task('transpile', () => {
   return gulp.src('src/**/*.js')
     .pipe(babel({
-      presets: ['es2015']
+      presets: ['@babel/env']
     }))
     //.pipe(concat('check.min.js'))
     //.pipe(concat('dbridge.js'))

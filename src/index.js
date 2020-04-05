@@ -1,5 +1,4 @@
-import 'babel-core/register';
-import 'babel-plugin-external-helpers';
+import '@babel/register';
 
 import { check, Match } from './match';
 

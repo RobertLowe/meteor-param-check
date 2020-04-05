@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import _ from 'underscore';
 import EJSON from 'ejson';
 
-import { check, Match } from '../dist';
+import { check, Match, CheckError } from '../dist';
 
 function matches(value, pattern) {
   var error = undefined;
@@ -25,7 +25,7 @@ function fails(value, pattern) {
   }
 
   expect(!!error).to.be.true;
-  expect(error).instanceof(Match.Error);
+  expect(error).instanceof(Error);
   expect(Match.test(value, pattern)).to.be.false;
 };
 
